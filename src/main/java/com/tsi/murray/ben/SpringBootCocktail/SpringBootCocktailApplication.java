@@ -18,6 +18,10 @@ public class SpringBootCocktailApplication {
 	private GarnishRepository garnishRepository;
 	@Autowired
 	private GlassRepository glassRepository;
+	@Autowired
+	private IngredientRepository ingredientRepository;
+	@Autowired
+	private InstructionRepository instructionRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootCocktailApplication.class, args);
@@ -25,8 +29,8 @@ public class SpringBootCocktailApplication {
 
 
 	//COCKTAIL
-	@GetMapping("/cocktail/allCocktails")
-	public @ResponseBody Iterable<Cocktail> getAllCocktails() {
+	@GetMapping("/cocktail/allCocktail")
+	public @ResponseBody Iterable<Cocktail> getAllCocktail() {
 		return cocktailRepository.findAll();
 	}
 
@@ -77,6 +81,34 @@ public class SpringBootCocktailApplication {
 		Glass newGlass = new Glass(Type, Volume);
 		glassRepository.save(newGlass);
 		return "Saved new glass.";
+	}
+
+
+	//INGREDIENT
+	@GetMapping("/ingredient/allIngredient")
+	public @ResponseBody Iterable<Ingredient> getAllIngredient() {
+		return ingredientRepository.findAll();
+	}
+
+	@PostMapping("/ingredient/addIngredient")
+	public @ResponseBody String addIngredient (@RequestParam String Name, @RequestParam double ABV, @RequestParam String Storage, @RequestParam String Description) {
+		Ingredient newIngredient = new Ingredient(Name, ABV, Storage, Description);
+		ingredientRepository.save(newIngredient);
+		return "Saved new ingredient.";
+	}
+
+
+	//INSTRUCTION
+	@GetMapping("/instruction/allInstruction")
+	public @ResponseBody Iterable<Instruction> getAllInstruction() {
+		return instructionRepository.findAll();
+	}
+
+	@PostMapping("/instruction/addInstruction")
+	public @ResponseBody String addInstruction (@RequestParam String Description) {
+		Instruction newInstruction = new Instruction(Description);
+		instructionRepository.save(newInstruction);
+		return "Saved new instruction.";
 	}
 }
 
