@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CocktailInstructions {
+    private int stepNumber;
+
     private List<Instruction> cocktailInstructions = new ArrayList();
 
 

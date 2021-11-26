@@ -1,11 +1,11 @@
 package com.tsi.murray.ben.SpringBootCocktail;
 
 public class Instruction {
-    private int stepNumber;
-    private String description;
+    private int instructionID;
+    private String instructionDescription;
 
-    public Instruction(int stepNumber, String description) {
-        this.stepNumber = stepNumber;
-        this.description = description;
+    public Instruction(int instructionID, String instructionDescription) {
+        this.instructionID = instructionID;
+        this.instructionDescription = instructionDescription;
     }
 }
