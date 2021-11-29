@@ -5,9 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @SpringBootApplication
 @RestController
 
+@RequestMapping("/CocktailDB")
 public class SpringBootCocktailApplication {
 
 	@Autowired
@@ -28,13 +31,19 @@ public class SpringBootCocktailApplication {
 	}
 
 
+
 	//COCKTAIL
-	@GetMapping("/cocktail/allCocktail")
+	@GetMapping("/cocktail")
 	public @ResponseBody Iterable<Cocktail> getAllCocktail() {
 		return cocktailRepository.findAll();
 	}
 
-	@PostMapping("/cocktail/addCocktail")
+	@GetMapping("/cocktail/{CocktailID}")
+	public Optional<Cocktail> getCocktailById(@PathVariable(value = "CocktailID") int CocktailID) {
+		return cocktailRepository.findById(CocktailID);
+	}
+
+	@PostMapping("/cocktail/add")
 	public @ResponseBody String addCocktail (@RequestParam String Name, @RequestParam String Type, @RequestParam int Volume) {
 		Cocktail newCocktail = new Cocktail(Name, Type, Volume);
 		cocktailRepository.save(newCocktail);
@@ -42,13 +51,19 @@ public class SpringBootCocktailApplication {
 	}
 
 
+
 	//EQUIPMENT
-	@GetMapping("/equipment/allEquipment")
+	@GetMapping("/equipment")
 	public @ResponseBody Iterable<Equipment> getAllEquipment() {
 		return equipmentRepository.findAll();
 	}
 
-	@PostMapping("/equipment/addEquipment")
+	@GetMapping("/equipment/{EquipmentID}")
+	public Optional<Equipment> getEquipmentById(@PathVariable(value = "EquipmentID") int EquipmentID) {
+		return equipmentRepository.findById(EquipmentID);
+	}
+
+	@PostMapping("/equipment/add")
 	public @ResponseBody String addEquipment (@RequestParam String Name, @RequestParam String Type, @RequestParam int Power) {
 		Equipment newEquipment = new Equipment(Name, Type, Power);
 		equipmentRepository.save(newEquipment);
@@ -56,13 +71,19 @@ public class SpringBootCocktailApplication {
 	}
 
 
+
 	//GARNISH
-	@GetMapping("/garnish/allGarnish")
+	@GetMapping("/garnish")
 	public @ResponseBody Iterable<Garnish> getAllGarnish() {
 		return garnishRepository.findAll();
 	}
 
-	@PostMapping("/garnish/addGarnish")
+	@GetMapping("/garnish/{GarnishID}")
+	public Optional<Garnish> getGarnishById(@PathVariable(value = "GarnishID") int GarnishID) {
+		return garnishRepository.findById(GarnishID);
+	}
+
+	@PostMapping("/garnish/add")
 	public @ResponseBody String addGarnish (@RequestParam String Name, @RequestParam String Type) {
 		Garnish newGarnish = new Garnish(Name, Type);
 		garnishRepository.save(newGarnish);
@@ -70,13 +91,19 @@ public class SpringBootCocktailApplication {
 	}
 
 
+
 	//GLASS
-	@GetMapping("/glass/allGlass")
+	@GetMapping("/glass")
 	public @ResponseBody Iterable<Glass> getAllGlass() {
 		return glassRepository.findAll();
 	}
 
-	@PostMapping("/glass/addGlass")
+	@GetMapping("/glass/{GlassID}")
+	public Optional<Glass> getGlassById(@PathVariable(value = "GlassID") int GlassID) {
+		return glassRepository.findById(GlassID);
+	}
+
+	@PostMapping("/glass/add")
 	public @ResponseBody String addGlass (@RequestParam String Type, @RequestParam int Volume) {
 		Glass newGlass = new Glass(Type, Volume);
 		glassRepository.save(newGlass);
@@ -84,13 +111,19 @@ public class SpringBootCocktailApplication {
 	}
 
 
+
 	//INGREDIENT
-	@GetMapping("/ingredient/allIngredient")
+	@GetMapping("/ingredient")
 	public @ResponseBody Iterable<Ingredient> getAllIngredient() {
 		return ingredientRepository.findAll();
 	}
 
-	@PostMapping("/ingredient/addIngredient")
+	@GetMapping("/ingredient/{IngredientID}")
+	public Optional<Ingredient> getIngredientById(@PathVariable(value = "IngredientID") int IngredientID) {
+		return ingredientRepository.findById(IngredientID);
+	}
+
+	@PostMapping("/ingredient/add")
 	public @ResponseBody String addIngredient (@RequestParam String Name, @RequestParam double ABV, @RequestParam String Storage, @RequestParam String Description) {
 		Ingredient newIngredient = new Ingredient(Name, ABV, Storage, Description);
 		ingredientRepository.save(newIngredient);
@@ -98,18 +131,25 @@ public class SpringBootCocktailApplication {
 	}
 
 
+
 	//INSTRUCTION
-	@GetMapping("/instruction/allInstruction")
+	@GetMapping("/instruction")
 	public @ResponseBody Iterable<Instruction> getAllInstruction() {
 		return instructionRepository.findAll();
 	}
 
-	@PostMapping("/instruction/addInstruction")
+	@GetMapping("/instruction/{InstructionID}")
+	public Optional<Instruction> getInstructionById(@PathVariable(value = "InstructionID") int InstructionID) {
+		return instructionRepository.findById(InstructionID);
+	}
+
+	@PostMapping("/instruction/add")
 	public @ResponseBody String addInstruction (@RequestParam String Description) {
 		Instruction newInstruction = new Instruction(Description);
 		instructionRepository.save(newInstruction);
 		return "Saved new instruction.";
 	}
+
 }
 
 
